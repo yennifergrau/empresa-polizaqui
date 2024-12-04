@@ -1,0 +1,63 @@
+<ion-content Scroll-Y="true" [translate]="true">
+  <div class="body">
+
+    <div class="container">
+        <div class="image-container">
+            <img src="../../../assets/img/logo_polizaqui.jpeg" alt="PolizaAqui Logo">
+          </div>
+          <h1>Ventas</h1>
+        <div class="filters">
+           
+            <ion-input type="date" [(ngModel)]="selectedDateInitial"   placeholder="   Fecha-inicio" /> <ion-icon name="created" slot="end" color="primary"></ion-icon>
+            <ion-input type="date"  [(ngModel)]="selectedDateFinaly"  placeholder="   Fecha-fin" />
+            <ion-select  interface="action-sheet" placeholder="   Todas" class="select-field">
+                <ion-select-option value="all">Todas</ion-select-option>
+                <ion-select-option value="paid">Pagadas</ion-select-option>
+                <ion-select-option value="pending">Pendientes</ion-select-option>
+            </ion-select>
+            <button onclick="filterSales()">Filtrar</button>
+        </div>
+
+
+        <ion-grid class="tabla">
+            <ion-row class="encabezado">
+                <ion-col class="text-center"> Poliza </ion-col>
+                <ion-col class="text-center"> Monto </ion-col>
+                <ion-col class="text-center"> Estatus </ion-col>
+                <ion-col class="text-center">Acciones</ion-col>
+            </ion-row>
+            @for(reporte of filteredItems;track $index){
+                <ng-container>
+                    <ion-row class="datos">
+                        <ion-col class="text-center">{{reporte.id_poliza}}</ion-col>
+                        <ion-col class="text-center">{{reporte.monto_pago}}</ion-col>
+                        <ion-col class="text-center">{{reporte.estado}}</ion-col>
+                        <ion-col class="text-center">
+                            <ion-button (click)="toggleDetalles(reporte)" >
+                                {{ reporte.mostrarDetalles ? '-' : '+' }}
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                    @if(reporte.mostrarDetalles){
+                        <ion-row class="detalle">
+                            <ion-col size="12" class="text-center">
+                                <ion-list lines="none" class="list">
+                                    <ion-item><strong>Fecha Registro:</strong> {{reporte.fecha_pago | date:'dd/MM/yyyy'}} </ion-item>
+                                    <ion-item><strong>Plan:</strong>{{reporte.plan}}</ion-item>
+                                    <ion-item><strong>Comision:</strong>5%</ion-item>
+                                </ion-list>
+                            </ion-col>
+                        </ion-row>
+                    }        
+                </ng-container>
+            }
+
+        </ion-grid>
+    </div>
+    <div class="footer-botton">
+        <footer>
+          <p>&copy; 2024 PolizAqui. Todos los derechos reservados. <a href="term-policy-dev">Términos y Condiciones</a></p>
+        </footer>
+      </div>
+  </div>
+</ion-content>

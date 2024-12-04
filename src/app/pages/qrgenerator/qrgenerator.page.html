@@ -1,0 +1,66 @@
+<ion-content [translate]="true" Scroll-Y="true">
+  <div class="body">
+    <div class="container">
+      <img src="../../../assets/img/logo_polizaqui.jpeg" alt="PolizaAqui Logo">
+      <h1>{{ title }}</h1>
+      <form [formGroup]="formQR" (ngSubmit)="generateQRCode()">
+        <input type="text" class="input-field uppercase" placeholder="Nombre de la empresa" formControlName="nombre" [readonly]="true" label="Rif" [hidden]="true">
+        <input type="text" class="input-field uppercase" placeholder="RIF de la empresa" formControlName="cedula_rif" [readonly]="true" [hidden]="true">
+        
+        <div class="body3">
+          <div class="container3">
+            <div class="header3">
+              <strong>{{rif}} {{nombre}}</strong>
+            </div>
+            <div class="cta-top">
+              Descarga tu código QR para vender pólizas de seguro
+            </div>
+            <div class="qr-code">
+              <img [src]="qrCodeUrl" alt="Generated QR Code">
+            </div>
+            <div class="qr-text">
+              PolizAqui - Tranquilidad a tu alcance
+            </div>
+            <div class="details">
+              <p><strong>Instrucciones:</strong> Descarga este código QR y colócalo en tu local. Los clientes pueden escanearlo para obtener su seguro de manera rápida y sencilla.</p>
+            </div>
+          </div>
+        </div>
+
+        
+
+          <div #qrContainer class="body4" style="display: none;">
+              <div class="container4">
+                  <div class="logo4">
+                      <img src="../../../assets/img/logo_polizaqui.jpeg" alt="PolizaAqui Logo">
+                  </div>
+                  <div class="header4">
+                      ¡Compra tu póliza aquí!
+                  </div>
+                  <div class="qr-code">
+                      <img [src]="qrCodeUrl" alt="Generated QR Code">
+                  </div>
+                  <div class="details4">
+                      Escanea el código QR y compra tu seguro en PolizAqui de manera rápida y sencilla.
+                  </div>
+              </div>
+          </div>
+ 
+      
+        
+        <app-components *ngIf="showLoading"></app-components>
+
+        <button type="button" class="button2" [disabled]="!qrCodeUrl" (click)="downloadQRCode()">Descargar</button>
+      </form>
+
+
+    </div>
+    <div class="footer-botton">
+      <footer>
+        <p>&copy; 2024 PolizAqui. Todos los derechos reservados. <a href="term-policy-dev">Términos y Condiciones</a></p>
+      </footer>
+    </div>
+  </div>
+
+
+</ion-content>
