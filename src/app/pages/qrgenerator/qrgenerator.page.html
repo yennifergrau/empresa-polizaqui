@@ -6,7 +6,7 @@
       <form [formGroup]="formQR" (ngSubmit)="generateQRCode()">
         <input type="text" class="input-field uppercase" placeholder="Nombre de la empresa" formControlName="nombre" [readonly]="true" label="Rif" [hidden]="true">
         <input type="text" class="input-field uppercase" placeholder="RIF de la empresa" formControlName="cedula_rif" [readonly]="true" [hidden]="true">
-        
+
         <div class="body3">
           <div class="container3">
             <div class="header3">
@@ -27,15 +27,18 @@
           </div>
         </div>
 
-        
+
 
           <div #qrContainer class="body4" style="display: none;">
               <div class="container4">
                   <div class="logo4">
                       <img src="../../../assets/img/logo_polizaqui.jpeg" alt="PolizaAqui Logo">
                   </div>
+                  <div class="header3">
+                    <strong>{{rif}} {{nombre}}</strong>
+                  </div>
                   <div class="header4">
-                      ¡Compra tu póliza aquí!
+                    ¡Compra tu póliza aquí!
                   </div>
                   <div class="qr-code">
                       <img [src]="qrCodeUrl" alt="Generated QR Code">
@@ -45,9 +48,9 @@
                   </div>
               </div>
           </div>
- 
-      
-        
+
+
+
         <app-components *ngIf="showLoading"></app-components>
 
         <button type="button" class="button2" [disabled]="!qrCodeUrl" (click)="downloadQRCode()">Descargar</button>
